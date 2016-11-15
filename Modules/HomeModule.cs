@@ -18,11 +18,16 @@ namespace Cars
       Car mercedes = new Car("Mercedes Benz CLS550", 39900, 37979, "Affordable old-man car.");
 
       Car bmw = new Car("BMW X1", 20000, 0, "Sporty, young, you know you want it.");
+
       List<Car> currentInventory = Car.GetAll();
       Inventory.Add("CarInventory", currentInventory);
-      // System.Console.WriteLine(Inventory["CarInventory"]);
-      System.Console.WriteLine(currentInventory[0].GetMakeModel());
       Get["/"] = _ => View["car_index.cshtml", Inventory];
+      Get["/add_car"] = _ => View["add_car.cshtml"];
+      Post["/car_added"] = _ =>
+      {
+        Car newCar = new Car (Request.Form["make-model"], Request.Form["price"], Request.Form["mileage"], Request.Form["description"]);
+        return View["car_added.cshtml", newCar];
+      };
     }
   }
 }
