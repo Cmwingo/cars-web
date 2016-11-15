@@ -1,7 +1,9 @@
 <h1>Car Inventory</h1>
+@* <h2>@Model["CarInventory"][0].GetDescription()</h2> *@
 <ul>
-  @foreach(Car automobile in @Model["CarInventory"])
+  @foreach(var automobile in @Model["CarInventory"])
   {
-    <li>@automobile</li>
+    <li>@automobile.GetMakeModel() Price: @automobile.GetPrice() Miles: @automobile.GetMiles()</li>
+    <p>@automobile.GetDescription()</p>
   }
 </ul>

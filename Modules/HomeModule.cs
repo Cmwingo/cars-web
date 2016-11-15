@@ -8,7 +8,21 @@ namespace Cars
   {
     public HomeModule()
     {
-      Get["/"] = _ => View["car_index.cshtml"];
+      Dictionary<string, object> Inventory = new Dictionary<string, object>();
+      Car porsche = new Car("2014 Porsche 911", 114991, 7864, "Like the fastest black toad you've ever seen.");
+
+      Car ford = new Car("2011 Ford F450", 55995, 14241, "Perfect for hauling all your big shit.");
+
+      Car lexus = new Car("2013 Lexus RX 350", 44700, 20000, "Perfect 'Mom' car.");
+
+      Car mercedes = new Car("Mercedes Benz CLS550", 39900, 37979, "Affordable old-man car.");
+
+      Car bmw = new Car("BMW X1", 20000, 0, "Sporty, young, you know you want it.");
+      List<Car> currentInventory = Car.GetAll();
+      Inventory.Add("CarInventory", currentInventory);
+      // System.Console.WriteLine(Inventory["CarInventory"]);
+      System.Console.WriteLine(currentInventory[0].GetMakeModel());
+      Get["/"] = _ => View["car_index.cshtml", Inventory];
     }
   }
 }
